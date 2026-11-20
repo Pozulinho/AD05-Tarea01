@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Añadir libro</title>
+</head>
+<body>
+
+	<form method="post" action="#" th:action="@{/genero/new/submit}" th:object="${generoForm}">
+	  <h1>
+	    <span th:text="*{id} ? 'Editar' : 'Nuevo'"></span> género
+	  </h1>
+	  
+	  <input type="hidden" th:field="*{id}" id="id" />
+	  <div>
+	    <label for="tituloInput">Género</label>
+	    <input type="text" id="tituloInput" placeholder="Género" th:field="*{genero}" />
+	  </div>				
+	  <button type="submit">Enviar</button>
+	</form>
+
+<br/>  
+</body>
+</html>

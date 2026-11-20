@@ -22,27 +22,27 @@ public class GeneroController {
 	GeneroRepository generoRepository;
 		
 		@GetMapping("/delete/{id}")
-		public String delete(@PathVariable("id") Long id) {
+		public String borrarGenero(@PathVariable("id") Long id) {
 			generoRepository.deleteById(id);
 		return "redirect:/genero";
 		}
 		
 		@GetMapping("/new")
-		public String initCreationForm(Model model) {
+		public String crearGeneroForm(Model model) {
 			Genero genero = new Genero();
-			model.addAttribute("genero", genero);
+			model.addAttribute("generoForm", genero);
 			return "generoForm";
 		}
 		
 		@PostMapping("/new/submit")
-		public String processCreationForm(@ModelAttribute Genero genero) {
+		public String ejecutarGeneroForm(@ModelAttribute ("generoForm") Genero genero) {
 			generoRepository.save(genero);
 			return "redirect:/genero";
 		}
 		
 		@GetMapping("/edit/{id}")
-		public String initEditForm(@PathVariable("id") Long id, Model model) {	
-			model.addAttribute("genero", generoRepository.findById(id));
+		public String editarGeneroForm(@PathVariable("id") Long id, Model model) {	
+			model.addAttribute("generoForm", generoRepository.findById(id).orElse(null));
 			return "generoForm";
 		}
 }

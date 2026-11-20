@@ -5,16 +5,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>La libreria</title>
+        <title>Detalle de libros</title>
     </head>
     <body>
         
         <!-- Page content-->
-        <div class="container">
-            <div class="text-center mt-5">
-                <h1>Busca tus libros favoritos</h1>
-                <p class="lead">or something like that</p>
+        <div>
+            <div>
+                <h1>Añade o edita tus libros favoritos</h1>
             </div>
         </div>
+		<table>
+		     <tr>
+		      	<th scope="col">Titulo</th>
+		     	<th scope="col">Autor</th>
+		     	<th scope="col">Editorial</th>
+		      	<th scope="col">Año Publicación</th>
+		      	<th scope="col">Action</th>
+		    </tr>
+		    <tr th:each="libro : ${libros}">
+		        <td scope="row" th:text="${libro.titulo}"></td>
+		        <td scope="row" th:text="${libro.autor}"></td>
+		        <td scope="row" th:text="${libro.editorial}"></td>
+		        <td scope="row" th:text="${libro.anoPublicacion}"></td>
+				<td scope="row" th:text="${libro.genero.genero}"></td>				
+		        <td class="actions"><a th:href="@{/libros/edit/{id}(id=${libro.id})}">Editar</a>   						
+									<a th:href="@{/libros/delete/{id}(id=${libro.id})}">Borrar</a>   						
+									</td>
+			</tr>    
+		</table>
+
+		<a th:href="@{/libros/new}">Añade un libro</a> 
     </body>
 </html>
