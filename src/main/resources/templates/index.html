@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+		      rel="stylesheet">
         <title>La libreria</title>
     </head>
     <body>
@@ -13,6 +15,14 @@
         <div>
             <div>
                 <h1>Busca tus libros favoritos</h1>
+				<nav>
+					<div>
+				    	<a th:href="@{/genero}">Gestionar géneros</a>
+					<div/>
+					<div>
+						<a th:href="@{/libros}">Gestionar libros</a>
+					<div/>
+				</nav>
             </div>
         </div>
     </body>

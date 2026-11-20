@@ -1,5 +1,7 @@
 package com.ad05.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ad05.domain.Genero;
 import com.ad05.domain.Libro;
 import com.ad05.repository.GeneroRepository;
 import com.ad05.repository.LibroRepository;
@@ -23,7 +26,7 @@ public class LibroController {
 	GeneroRepository generoRepository;
 	
 	
-	@GetMapping("/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public String borrarLibro(@PathVariable("id") Long id) {
 		libroRepository.deleteById(id);
 		return "redirect:/libros";
@@ -31,6 +34,15 @@ public class LibroController {
 	
 	@GetMapping("/new")
 	public String nuevoLibroForm(Model model) {
+		
+	    List<Genero> generos = generoRepository.findAll();
+
+	    if (generos.isEmpty()) {
+	        model.addAttribute("mensaje",
+	            "Primero debes crear un género antes de añadir libros.");
+	        return "librosForm";
+	    }
+		
 		Libro libro = new Libro();
 		model.addAttribute("libro", libro);
 		model.addAttribute("generos", generoRepository.findAll());
@@ -44,8 +56,11 @@ public class LibroController {
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String editarLibroForm(@PathVariable("id") Long id, Model model) {	
-		model.addAttribute("libro", libroRepository.findById(id));
+	public String editarLibroForm(@PathVariable("id") Long id, Model model) {
+	    Libro libro = libroRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+		
+		model.addAttribute("libro", libro);
 		model.addAttribute("generos", generoRepository.findAll());
 		return "librosForm";
 	}

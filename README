@@ -1,0 +1,38 @@
+# Gestión de libros y géneros
+
+## Descripción
+Aplicación web desarrollada con Spring Boot para gestionar libros y géneros literarios.
+
+Un género puede tener varios libros y cada libro pertenece a un único género.
+
+Cuando se elimina un género, también se eliminan sus libros asociados mediante cascada JPA.
+
+## Tecnologías
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- Spring MVC
+- Thymeleaf
+- Bootstrap
+- Oracle XE 21c
+- Maven
+
+## Configuración de Oracle
+La aplicación utiliza Oracle XE 21c y el servicio XEPDB1.
+Las credenciales se configuran mediante las variables de entorno DB_URL, DB_USERNAME y DB_PASSWORD,
+que deben definirse antes de ejecutar la aplicación.
+
+Configurar las credenciales mediante variables de entorno.
+
+## Arranque
+1. Abrir el proyecto como proyecto Maven.
+2. Comprobar que Oracle está iniciado.
+3. Configurar las credenciales de conexión.
+4. Ejecutar la clase principal de Spring Boot.
+5. Acceder a http://localhost:8083
+
+## Funcionalidades
+- Alta, consulta, edición y borrado de géneros.
+- Alta, consulta, edición y borrado de libros.
+- Asociación de libros con géneros.
+- Borrado en cascada de los libros al eliminar un género.

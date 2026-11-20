@@ -21,7 +21,7 @@ public class GeneroController {
 	@Autowired
 	GeneroRepository generoRepository;
 		
-		@GetMapping("/delete/{id}")
+		@PostMapping("/delete/{id}")
 		public String borrarGenero(@PathVariable("id") Long id) {
 			generoRepository.deleteById(id);
 		return "redirect:/genero";
@@ -42,7 +42,9 @@ public class GeneroController {
 		
 		@GetMapping("/edit/{id}")
 		public String editarGeneroForm(@PathVariable("id") Long id, Model model) {	
-			model.addAttribute("generoForm", generoRepository.findById(id).orElse(null));
+		    Genero genero = generoRepository.findById(id)
+		            .orElseThrow(() -> new RuntimeException("Género no encontrado"));
+			model.addAttribute("generoForm", genero);
 			return "generoForm";
 		}
 }
